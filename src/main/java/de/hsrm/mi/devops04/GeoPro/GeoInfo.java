@@ -1,12 +1,16 @@
 package de.hsrm.mi.devops04.GeoPro;
 
+import lombok.Data;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
-//@XmlRootElement(name = "geoinfo")
+@Data
+@XmlRootElement(name = "ip")
 public class GeoInfo {
-    String ip;
-    String country;
-    String town;
+    private String ip;
+    private String isp;
+    private String country;
+    private String town;
 
     public String getIp() {
         return ip;
@@ -14,6 +18,14 @@ public class GeoInfo {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getIsp() {
+        return isp;
+    }
+
+    public void setIsp(String isp) {
+        this.isp = isp;
     }
 
     public String getCountry() {
