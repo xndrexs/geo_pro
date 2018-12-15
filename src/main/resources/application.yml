@@ -1,0 +1,3 @@
+cache:
+  maxentries: 10
+  maxage: 60

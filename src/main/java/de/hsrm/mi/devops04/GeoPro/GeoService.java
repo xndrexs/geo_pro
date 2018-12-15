@@ -29,8 +29,6 @@ public class GeoService implements Serializable {
                         .build(),
                 GeoInfo.class
         );
-        GeoInfo geoInfo = response.getBody();
-
-        return geoInfo;
+        return response.getBody();
     }
 }
