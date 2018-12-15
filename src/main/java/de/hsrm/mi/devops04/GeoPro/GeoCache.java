@@ -1,7 +1,7 @@
 package de.hsrm.mi.devops04.GeoPro;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -10,13 +10,13 @@ import java.util.*;
 @Component
 public class GeoCache {
 
+    @Autowired
+    GeoConfig geoConfig;
+
     private List<GeoInfo> cache = new ArrayList<>();
-
-    @Value("${cache.maxentries:10}")
-    private int maxEntries;
-
-    @Value("${cache.maxage:60}")
-    private Long maxAge;
+    private List<String> countrycodes = geoConfig.getCountrycodes();
+    private int maxEntries = geoConfig.getMaxEntries();
+    private Long maxAge = geoConfig.getMaxAge();
 
     public GeoInfo getGeoInfoFromCache(String ip) {
         removeOldEntries();
