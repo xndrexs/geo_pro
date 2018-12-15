@@ -13,10 +13,17 @@ public class GeoCache {
     @Autowired
     GeoConfig geoConfig;
 
-    private List<GeoInfo> cache = new ArrayList<>();
-    private List<String> countrycodes = geoConfig.getCountrycodes();
-    private int maxEntries = geoConfig.getMaxEntries();
-    private Long maxAge = geoConfig.getMaxAge();
+    private List<GeoInfo> cache;
+    private List<String> countrycodes;
+    private int maxEntries;
+    private Long maxAge;
+
+    public GeoCache() {
+        cache = new ArrayList<>();
+        countrycodes = geoConfig.getCountrycodes();
+        maxEntries = geoConfig.getMaxEntries();
+        maxAge = geoConfig.getMaxAge();
+    }
 
     public GeoInfo getGeoInfoFromCache(String ip) {
         removeOldEntries();
@@ -31,11 +38,25 @@ public class GeoCache {
     }
 
     public void addGeoInfoToCache(GeoInfo geoInfo) {
+        if (checkCountryCode(geoInfo)) {
+            log.info("Entry not added, found in non-cached");
+            return;
+        }
         if (cache.size() > maxEntries) {
             removeOldestEntry();
         }
         cache.add(geoInfo);
         log.info("New entry added to cache with ip {}", geoInfo.getResults().getResult().getIp());
+    }
+
+    private boolean checkCountryCode(GeoInfo geoInfo) {
+        for (String countrycode : countrycodes) {
+            String geoInfoCountryCode = geoInfo.getResults().getResult().getCountrycode();
+            if (countrycode.equals(geoInfoCountryCode)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeOldEntries() {
