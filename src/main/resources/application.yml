@@ -1,5 +1,5 @@
 cache:
-  maxentries: 2
-  maxage: 10
+  maxEntries: 2
+  maxAge: 120
   countrycodes:
-    - DE
+    - GER

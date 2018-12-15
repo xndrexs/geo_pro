@@ -44,7 +44,7 @@ public class GeoCache {
             log.info("Entry not added, found in non-cache");
             return;
         }
-        if (cache.size() > maxEntries) {
+        if (cache.size() >= maxEntries) {
             removeOldestEntry();
         }
         cache.add(geoInfo);
@@ -62,10 +62,8 @@ public class GeoCache {
     }
 
     public void removeOldEntries() {
-        cache.removeIf((geoInfo) ->
-            timeExceeded(geoInfo)
-        );
-        log.info("Old entries removed from cache");
+        cache.removeIf(geoInfo -> timeExceeded(geoInfo));
+        log.info("Old entries removed from cache, current size {}", cache.size());
     }
 
     private boolean timeExceeded(GeoInfo geoInfo) {
