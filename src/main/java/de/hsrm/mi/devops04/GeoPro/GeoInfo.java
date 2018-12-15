@@ -3,6 +3,7 @@ package de.hsrm.mi.devops04.GeoPro;
 import lombok.Data;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 @Data
 @XmlRootElement(name = "ip")
@@ -25,4 +26,5 @@ public class GeoInfo {
     }
 
     private GeoInfoResults results;
+    private Long timeStamp = new Date().getTime();
 }

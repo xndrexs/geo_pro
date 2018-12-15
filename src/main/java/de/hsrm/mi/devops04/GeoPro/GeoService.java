@@ -21,8 +21,16 @@ public class GeoService implements Serializable {
     private final String API = "http://api.geoiplookup.net/?query=";
 
     public GeoInfo getGeoInfo(String ip) {
-        ResponseEntity<GeoInfo> response = getResponse(ip);
-        return response.getBody();
+        GeoInfo cachedGeoInfo = geoCache.getGeoInfoFromCache(ip);
+        if (cachedGeoInfo != null) {
+            return cachedGeoInfo;
+        } else {
+            ResponseEntity<GeoInfo> response = getResponse(ip);
+            log.info("New external response for {}", ip);
+            GeoInfo newGeoInfo = response.getBody();
+            geoCache.addGeoInfoToCache(newGeoInfo);
+            return newGeoInfo;
+        }
     }
 
     private ResponseEntity<GeoInfo> getResponse(String ip) {
