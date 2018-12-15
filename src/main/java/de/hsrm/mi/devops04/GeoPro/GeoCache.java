@@ -10,18 +10,20 @@ import java.util.*;
 @Component
 public class GeoCache {
 
-    @Autowired
-    GeoConfig geoConfig;
+    private final GeoConfig geoConfig;
 
     private List<GeoInfo> cache;
     private List<String> countrycodes;
     private int maxEntries;
     private Long maxAge;
 
-    public GeoCache() {
+    @Autowired
+    public GeoCache(GeoConfig geoConfig) {
+        this.geoConfig = geoConfig;
+
         cache = new ArrayList<>();
-        countrycodes = geoConfig.getCountrycodes();
         maxEntries = geoConfig.getMaxEntries();
+        countrycodes = geoConfig.getCountrycodes();
         maxAge = geoConfig.getMaxAge();
     }
 
@@ -39,7 +41,7 @@ public class GeoCache {
 
     public void addGeoInfoToCache(GeoInfo geoInfo) {
         if (checkCountryCode(geoInfo)) {
-            log.info("Entry not added, found in non-cached");
+            log.info("Entry not added, found in non-cache");
             return;
         }
         if (cache.size() > maxEntries) {

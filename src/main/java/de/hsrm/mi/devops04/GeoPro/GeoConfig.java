@@ -3,6 +3,7 @@ package de.hsrm.mi.devops04.GeoPro;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Max;
@@ -11,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Validated
+@Component
 @Configuration
 @ConfigurationProperties(prefix = "cache")
-@Validated
 public class GeoConfig {
 
     @Min(5)
