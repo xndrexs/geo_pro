@@ -15,10 +15,12 @@ import java.net.URI;
 @Service
 public class GeoService implements Serializable {
 
-    @Autowired
-    private GeoCache geoCache;
-
+    private final GeoCache geoCache;
     private final String API = "http://api.geoiplookup.net/?query=";
+
+    public GeoService(GeoCache geoCache) {
+        this.geoCache = geoCache;
+    }
 
     public GeoInfo getGeoInfo(String ip) {
         GeoInfo cachedGeoInfo = geoCache.getGeoInfoFromCache(ip);

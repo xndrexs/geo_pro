@@ -2,4 +2,4 @@ cache:
   maxEntries: 2
   maxAge: 120
   countrycodes:
-    - GER
+    - DE
