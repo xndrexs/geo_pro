@@ -1,3 +1,5 @@
 cache:
   maxentries: 2
   maxage: 10
+  nocache:
+    - DE

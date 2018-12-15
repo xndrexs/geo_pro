@@ -12,10 +12,10 @@ public class GeoCache {
 
     private List<GeoInfo> cache = new ArrayList<>();
 
-    @Value("${maxentries:10}")
+    @Value("${cache.maxentries:10}")
     private int maxEntries;
 
-    @Value("${maxage:60}")
+    @Value("${cache.maxage:60}")
     private Long maxAge;
 
     public GeoInfo getGeoInfoFromCache(String ip) {
