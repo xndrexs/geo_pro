@@ -75,8 +75,30 @@ public class GeoCache {
     }
 
     private void removeOldestEntry() {
-        GeoInfo geoInfo = Collections.min(cache, Comparator.comparing(g -> g.getTimeStamp()));
+        GeoInfo geoInfo = getOldestEntryFromCache();
         cache.remove(geoInfo);
         log.info("Oldest entry was removed from cache");
+    }
+
+    public GeoInfo getOldestEntryFromCache() {
+        //TODO: Fix this
+        GeoInfo geoInfo;
+        try {
+            geoInfo = Collections.min(cache);
+        } catch (NoSuchElementException e) {
+            geoInfo = new GeoInfo();
+        }
+        return geoInfo;
+    }
+
+    public GeoInfo getNewestEntryFromCache() {
+        //TODO: Fix this
+        GeoInfo geoInfo;
+        try {
+            geoInfo = Collections.max(cache);
+        } catch (NoSuchElementException e) {
+            geoInfo = new GeoInfo();
+        }
+        return geoInfo;
     }
 }

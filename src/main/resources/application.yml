@@ -3,3 +3,8 @@ cache:
   maxAge: 120
   countrycodes:
     - DE
+
+management:
+  endpoint:
+    health:
+      show-details: "ALWAYS"

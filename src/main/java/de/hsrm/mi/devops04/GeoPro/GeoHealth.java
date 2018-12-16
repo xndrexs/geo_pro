@@ -16,8 +16,11 @@ public class GeoHealth implements HealthIndicator {
     @Override
     public Health health() {
         return Health.up()
-                .withDetail("cacheSize", geoCache.getCountrycodes().size())
+                .withDetail("cacheSize", geoCache.getMaxEntries())
+                .withDetail("cacheUsed", geoCache.getCache().size())
                 .withDetail("maxAge", geoCache.getMaxAge())
+                .withDetail("oldestEntry", geoCache.getOldestEntryFromCache())
+                .withDetail("newestEntry", geoCache.getNewestEntryFromCache())
                 .build();
     }
 }

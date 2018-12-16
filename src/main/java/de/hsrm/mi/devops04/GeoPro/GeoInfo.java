@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @XmlRootElement(name = "ip")
-public class GeoInfo {
+public class GeoInfo implements Comparable<GeoInfo> {
 
     @Data
     public class GeoInfoResults {
@@ -27,4 +27,9 @@ public class GeoInfo {
 
     private GeoInfoResults results;
     private Long timeStamp = new Date().getTime();
+
+    @Override
+    public int compareTo(GeoInfo geoInfo) {
+        return getTimeStamp() < geoInfo.getTimeStamp() ? -1 : 0;
+    }
 }
