@@ -2,14 +2,18 @@ package de.hsrm.mi.devops04.GeoPro;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
+import java.net.InetAddress;
 import java.net.URI;
+import java.net.UnknownHostException;
 
 @Slf4j
 @Service
@@ -47,6 +51,13 @@ public class GeoService implements Serializable {
     }
 
     private URI generateUrl(String ip) {
-        return URI.create(API + ip);
+        InetAddress inetAddress;
+        try {
+            inetAddress = InetAddress.getByName(ip);
+        } catch (UnknownHostException e) {
+            //TODO: Custom exception
+            throw new RuntimeException("Bad IP");
+        }
+        return URI.create(API + inetAddress.getHostAddress());
     }
 }
