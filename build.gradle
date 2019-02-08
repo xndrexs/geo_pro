@@ -20,7 +20,13 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+	maven {
+		url = "http://devops0405.intern.mi.hs-rm.de:8081/my-snapshots"
+		credentials {
+			username admin
+			password admin123
+		}
+	}
 }
 
 
@@ -32,4 +38,5 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-configuration-processor")
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.9.7'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.2.RELEASE'
 }
