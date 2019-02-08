@@ -20,11 +20,12 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+	mavenCentral()
 	maven {
 		url = "http://devops0405.intern.mi.hs-rm.de:8081/my-snapshots"
 		credentials {
-			username admin
-			password admin123
+			username 'admin'
+			password 'admin123'
 		}
 	}
 }
